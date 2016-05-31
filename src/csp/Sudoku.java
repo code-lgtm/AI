@@ -186,28 +186,26 @@ public class Sudoku {
             }
         }
 
-        ArrayList<HashMap<String, String>> valueList = new ArrayList<>();
         for (int i = 0; i < domain.length(); i++) {
             HashMap<String, String> modifiedValue =
                     search(assign((HashMap<String, String>)values.clone(), s, domain.substring(i, i+1)));
             if (modifiedValue != null) {
-                valueList.add(modifiedValue);
+                return modifiedValue;
             }
         }
-
-        for (HashMap<String, String> newVal : valueList)
-            return newVal;
-
         return null;
     }
 
 
     public static void main(String[] args) {
         Sudoku sudoku = new Sudoku();
+        long before = System.currentTimeMillis();
         //String grid = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"; //Simple
         //String grid = "4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......"; //Hard
-        String grid = "3...8.......7....51..............36...2..4....7...........6.13..452...........8.."; //Hard
-        //String grid = ".....6....59.....82....8....45........3........6..3.54...325..6.................."; //Hardest
+        //String grid = "3...8.......7....51..............36...2..4....7...........6.13..452...........8.."; //Hard
+        String grid = ".....6....59.....82....8....45........3........6..3.54...325..6.................."; //Hardest
+        long after = System.currentTimeMillis();
         sudoku.display(sudoku.solve(grid));
+        System.out.println("Time Taken: " + (after - before));
     }
 }
